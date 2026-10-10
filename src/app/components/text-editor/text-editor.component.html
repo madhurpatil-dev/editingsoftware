@@ -1,365 +1,206 @@
-<div class="editor-container">
-  <div class="toolbar">
-    <button
-      mat-icon-button
-      title="Bold"
-      aria-label="Bold"
-      (click)="format('bold')"
-      class="fresh-color-1"
-    >
-      <mat-icon>format_bold</mat-icon>
-    </button>
-
-    <button
-      mat-icon-button
-      title="Italic"
-      (click)="format('italic')"
-      class="fresh-color-2"
-    >
-      <mat-icon>format_italic</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Underline"
-      (click)="toggleUnderline()"
-      class="fresh-color-3"
-    >
-      <mat-icon>format_underlined</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Ordered List"
-      (click)="format('insertOrderedList')"
-      class="fresh-color-7"
-    >
-      <mat-icon>format_list_numbered</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Unordered List"
-      (click)="format('insertUnorderedList')"
-      class="fresh-color-5"
-    >
-      <mat-icon>format_list_bulleted</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Undo"
-      (click)="format('undo')"
-      class="fresh-color-6"
-    >
-      <mat-icon>undo</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Redo"
-      (click)="format('redo')"
-      class="fresh-color-7"
-    >
-      <mat-icon>redo</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Align Left"
-      (click)="alignText('left')"
-      class="fresh-color-8"
-    >
-      <mat-icon>format_align_left</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Align Center"
-      (click)="alignText('center')"
-      class="fresh-color-9"
-    >
-      <mat-icon>format_align_center</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Align Right"
-      (click)="alignText('right')"
-      class="fresh-color-10"
-    >
-      <mat-icon>format_align_right</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Justify"
-      (click)="alignText('justify')"
-      class="fresh-color-1"
-    >
-      <mat-icon>format_align_justify</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Heading 1"
-      (click)="setHeading(1)"
-      class="fresh-color-2"
-    >
-      <mat-icon>looks_one</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Heading 2"
-      (click)="setHeading(2)"
-      class="fresh-color-3"
-    >
-      <mat-icon>looks_two</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Heading 3"
-      (click)="setHeading(3)"
-      class="fresh-color-4"
-    >
-      <mat-icon>looks_3</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Subscript"
-      (click)="toggleSubscript()"
-      class="fresh-color-5"
-    >
-      <mat-icon>vertical_align_bottom</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Superscript"
-      (click)="toggleSuperscript()"
-      class="fresh-color-6"
-    >
-      <mat-icon>vertical_align_top</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Strikethrough"
-      (click)="toggleStrikethrough()"
-      class="fresh-color-7"
-    >
-      <mat-icon>strikethrough_s</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Clear Formatting"
-      (click)="clearFormatting()"
-      class="fresh-color-8"
-    >
-      <mat-icon>format_clear</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Indent"
-      (click)="indent()"
-      class="fresh-color-9"
-    >
-      <mat-icon>format_indent_increase</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Outdent"
-      (click)="outdent()"
-      class="fresh-color-10"
-    >
-      <mat-icon>format_indent_decrease</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Insert Horizontal Rule"
-      (click)="insertHorizontalRule()"
-      class="fresh-color-1"
-    >
-      <mat-icon>remove</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Toggle Blockquote"
-      (click)="toggleBlockquote()"
-      class="fresh-color-3"
-    >
-      <mat-icon>format_quote</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Insert Date"
-      (click)="insertDate()"
-      class="fresh-color-5"
-    >
-      <mat-icon>date_range</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Insert Time"
-      (click)="insertTime()"
-      class="fresh-color-6"
-    >
-      <mat-icon>access_time</mat-icon>
-    </button>
-
-    <button
-      mat-icon-button
-      title="Download as Text"
-      (click)="downloadAsText()"
-      class="fresh-color-10"
-    >
-      <mat-icon>description</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Insert Special Character"
-      (click)="insertSpecialCharacter('©')"
-      class="fresh-color-1"
-    >
-      <mat-icon>copyright</mat-icon>
-    </button>
-    <div
-      class="emoji-container"
-      (mouseenter)="openEmojiPicker()"
-      (mouseleave)="closeEmojiPicker()"
-    >
-      <button
-        mat-icon-button
-        title="Insert Emoji"
-        class="fresh-color-2"
-        (mousedown)="$event.preventDefault()"
-        (click)="toggleEmojiPicker()"
-      >
-        😊
-      </button>
-      <div *ngIf="showEmojiPicker" class="emoji-picker">
-        <span
-          *ngFor="let emoji of emojis"
-          (mousedown)="$event.preventDefault(); insertEmoji(emoji)"
-        >
-          {{ emoji }}
-        </span>
-      </div>
+<section class="editor-page" aria-labelledby="page-title">
+  <header class="page-intro">
+    <div>
+      <p class="eyebrow">WORKSPACE</p>
+      <h1 id="page-title">A clear space for your ideas</h1>
+      <p class="page-description">Write, format, and save your text in one place.</p>
     </div>
+  </header>
 
-    <button
-      mat-icon-button
-      title="Insert Line Break"
-      (click)="insertLineBreak()"
-      class="fresh-color-3"
-    >
-      <mat-icon>wrap_text</mat-icon>
-    </button>
-    <div
-      class="highlight-dropdown"
-      (mouseenter)="showHighlightOptions = true"
-      (mouseleave)="showHighlightOptions = false"
-    >
-      <button mat-icon-button title="Highlight" class="fresh-color-6">
-        <mat-icon>highlight</mat-icon>
+  <section class="editor-card" aria-label="Text editor">
+    <div class="toolbar-heading">
+      <h2>Formatting tools</h2>
+      <span class="toolbar-hint">Choose a tool to format your text</span>
+    </div>
+    <div class="toolbar" role="group" aria-label="Text formatting tools">
+      <button type="button" mat-icon-button title="Bold" aria-label="Bold" (click)="format('bold')">
+        <mat-icon aria-hidden="true">format_bold</mat-icon>
       </button>
-      <div class="dropdown-content" *ngIf="showHighlightOptions">
-        <div>
-          <color-sketch
-            (onChangeComplete)="handleColorChange($event)"
-          ></color-sketch>
+      <button type="button" mat-icon-button title="Italic" aria-label="Italic" (click)="format('italic')">
+        <mat-icon aria-hidden="true">format_italic</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Underline" aria-label="Underline" (click)="toggleUnderline()">
+        <mat-icon aria-hidden="true">format_underlined</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Ordered list" aria-label="Ordered list" (click)="format('insertOrderedList')">
+        <mat-icon aria-hidden="true">format_list_numbered</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Unordered list" aria-label="Unordered list" (click)="format('insertUnorderedList')">
+        <mat-icon aria-hidden="true">format_list_bulleted</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Undo" aria-label="Undo" (click)="format('undo')">
+        <mat-icon aria-hidden="true">undo</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Redo" aria-label="Redo" (click)="format('redo')">
+        <mat-icon aria-hidden="true">redo</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Align left" aria-label="Align left" (click)="alignText('left')">
+        <mat-icon aria-hidden="true">format_align_left</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Align center" aria-label="Align center" (click)="alignText('center')">
+        <mat-icon aria-hidden="true">format_align_center</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Align right" aria-label="Align right" (click)="alignText('right')">
+        <mat-icon aria-hidden="true">format_align_right</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Justify" aria-label="Justify" (click)="alignText('justify')">
+        <mat-icon aria-hidden="true">format_align_justify</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Heading 1" aria-label="Heading 1" (click)="setHeading(1)">
+        <mat-icon aria-hidden="true">looks_one</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Heading 2" aria-label="Heading 2" (click)="setHeading(2)">
+        <mat-icon aria-hidden="true">looks_two</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Heading 3" aria-label="Heading 3" (click)="setHeading(3)">
+        <mat-icon aria-hidden="true">looks_3</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Subscript" aria-label="Subscript" (click)="toggleSubscript()">
+        <mat-icon aria-hidden="true">vertical_align_bottom</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Superscript" aria-label="Superscript" (click)="toggleSuperscript()">
+        <mat-icon aria-hidden="true">vertical_align_top</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Strikethrough" aria-label="Strikethrough" (click)="toggleStrikethrough()">
+        <mat-icon aria-hidden="true">strikethrough_s</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Clear formatting" aria-label="Clear formatting" (click)="clearFormatting()">
+        <mat-icon aria-hidden="true">format_clear</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Indent" aria-label="Indent" (click)="indent()">
+        <mat-icon aria-hidden="true">format_indent_increase</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Outdent" aria-label="Outdent" (click)="outdent()">
+        <mat-icon aria-hidden="true">format_indent_decrease</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Insert horizontal rule" aria-label="Insert horizontal rule" (click)="insertHorizontalRule()">
+        <mat-icon aria-hidden="true">remove</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Toggle blockquote" aria-label="Toggle blockquote" (click)="toggleBlockquote()">
+        <mat-icon aria-hidden="true">format_quote</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Insert date" aria-label="Insert date" (click)="insertDate()">
+        <mat-icon aria-hidden="true">date_range</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Insert time" aria-label="Insert time" (click)="insertTime()">
+        <mat-icon aria-hidden="true">access_time</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Download as text" aria-label="Download as text" (click)="downloadAsText()">
+        <mat-icon aria-hidden="true">description</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Insert special character" aria-label="Insert special character" (click)="insertSpecialCharacter('©')">
+        <mat-icon aria-hidden="true">copyright</mat-icon>
+      </button>
+
+      <div class="emoji-container" (mouseenter)="openEmojiPicker()" (mouseleave)="closeEmojiPicker()">
+        <button
+          type="button"
+          mat-icon-button
+          title="Insert emoji"
+          aria-label="Insert emoji"
+          (mousedown)="$event.preventDefault()"
+          (click)="toggleEmojiPicker()"
+        >
+          <span aria-hidden="true">😊</span>
+        </button>
+        <div *ngIf="showEmojiPicker" class="emoji-picker" role="group" aria-label="Choose an emoji">
+          <button
+            type="button"
+            class="emoji-option"
+            *ngFor="let emoji of emojis"
+            [attr.aria-label]="'Insert ' + emoji"
+            (mousedown)="$event.preventDefault()"
+            (click)="insertEmoji(emoji)"
+          >
+            {{ emoji }}
+          </button>
         </div>
       </div>
+
+      <button type="button" mat-icon-button title="Insert line break" aria-label="Insert line break" (click)="insertLineBreak()">
+        <mat-icon aria-hidden="true">wrap_text</mat-icon>
+      </button>
+      <div
+        class="highlight-dropdown"
+        (mouseenter)="showHighlightOptions = true"
+        (mouseleave)="showHighlightOptions = false"
+        (focusin)="showHighlightOptions = true"
+      >
+        <button type="button" mat-icon-button title="Highlight" aria-label="Highlight text">
+          <mat-icon aria-hidden="true">highlight</mat-icon>
+        </button>
+        <div class="dropdown-content" *ngIf="showHighlightOptions">
+          <color-sketch (onChangeComplete)="handleColorChange($event)"></color-sketch>
+        </div>
+      </div>
+
+      <button type="button" mat-icon-button title="Toggle read-only" aria-label="Toggle read-only" (click)="toggleReadOnly()">
+        <mat-icon aria-hidden="true">lock</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Fullscreen" aria-label="Toggle fullscreen" (click)="toggleFullscreen()">
+        <mat-icon aria-hidden="true">fullscreen</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Print" aria-label="Print" (click)="printContent()">
+        <mat-icon aria-hidden="true">print</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Download as HTML" aria-label="Download as HTML" (click)="downloadAsHTML()">
+        <mat-icon aria-hidden="true">code</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Insert table caption" aria-label="Insert table caption" (click)="insertTableCaption('Table Caption')">
+        <mat-icon aria-hidden="true">notes</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Insert footnote" aria-label="Insert footnote" (click)="insertFootnote()">
+        <mat-icon aria-hidden="true">subscript</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Insert table" aria-label="Insert table" (click)="openTableInputDialog()">
+        <mat-icon aria-hidden="true">table_chart</mat-icon>
+      </button>
+      <button
+        type="button"
+        mat-icon-button
+        [title]="isVoiceTyping ? 'Stop voice typing' : 'Start voice typing'"
+        [attr.aria-label]="isVoiceTyping ? 'Stop voice typing' : 'Start voice typing'"
+        (click)="startVoiceTyping()"
+      >
+        <mat-icon aria-hidden="true">{{ isVoiceTyping ? "mic_off" : "mic" }}</mat-icon>
+      </button>
     </div>
 
-    <button
-      mat-icon-button
-      title="Toggle Read-Only"
-      (click)="toggleReadOnly()"
-      class="fresh-color-10"
-    >
-      <mat-icon>lock</mat-icon>
-    </button>
+    <div class="editor-actions">
+      <div class="editor-label">
+        <h2>Your document</h2>
+        <span>Changes are ready to save when you are</span>
+      </div>
+      <div class="button-group">
+        <button type="button" class="btn-save" (click)="saveContent()">
+          <svg class="btn-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
+          </svg>
+          <span>Save content</span>
+        </button>
+        <button
+          type="button"
+          class="btn-read"
+          [attr.aria-label]="isReading ? 'Stop reading' : 'Start reading'"
+          (click)="isReading ? stopReading() : startReading()"
+        >
+          <svg class="btn-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+            <path fill="currentColor" [attr.d]="isReading ? 'M6 6h12v12H6z' : 'M8 5v14l11-7z'"/>
+          </svg>
+          <span>{{ isReading ? "Stop reading" : "Read aloud" }}</span>
+        </button>
+      </div>
+    </div>
 
-    <button
-      mat-icon-button
-      title="Fullscreen"
-      (click)="toggleFullscreen()"
-      class="fresh-color-7"
-    >
-      <mat-icon>fullscreen</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Print"
-      (click)="printContent()"
-      class="fresh-color-8"
-    >
-      <mat-icon>print</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      title="Download as HTML"
-      (click)="downloadAsHTML()"
-      class="fresh-color-9"
-    >
-      <mat-icon>code</mat-icon>
-    </button>
-
-    <button
-      mat-icon-button
-      title="Insert Table Caption"
-      (click)="insertTableCaption('Table Caption')"
-      class="fresh-color-2"
-    >
-      <mat-icon>notes</mat-icon>
-    </button>
-
-    <button
-      mat-icon-button
-      title="Insert Footnote"
-      (click)="insertFootnote()"
-      class="fresh-color-1"
-    >
-      <mat-icon>subscript</mat-icon>
-    </button>
-
-    <button
-      mat-icon-button
-      title="Insert Table"
-      (click)="openTableInputDialog()"
-      class="fresh-color-6"
-    >
-      <mat-icon>table_chart</mat-icon>
-    </button>
-
-    <button
-      mat-icon-button
-      title="{{ isVoiceTyping ? 'Stop Voice Typing' : 'Start Voice Typing' }}"
-      (click)="startVoiceTyping()"
-      class="fresh-color-3"
-    >
-      <mat-icon>{{ isVoiceTyping ? "mic_off" : "mic" }}</mat-icon>
-    </button>
-
-    
-
-  </div>
-</div>
-<div class="editor-container">
-<div class="button-group">
-  <button type="button" class="btn btn-save" (click)="saveContent()">
-    <span class="btn-icon">
-      <svg viewBox="0 0 24 24" width="20" height="20">
-        <path fill="currentColor" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
-      </svg>
-    </span>
-    <span class="btn-text">Save Content</span>
-  </button>
-  
-  <button class="btn-read" title="{{ isReading ? 'Stop Reading' : 'Start Reading' }}" (click)="isReading ? stopReading() : startReading()">
-    <span class="btn-icon">
-      <svg viewBox="0 0 24 24" width="20" height="20">
-        <path fill="currentColor" [attr.d]="isReading ? 'M6 6h12v12H6z' : 'M8 5v14l11-7z'"/>
-      </svg>
-    </span>
-    <span class="btn-text">{{ isReading ? 'Stop' : 'Play' }}</span>
-  </button>
-</div>
-  <mat-form-field appearance="fill" class="editor-field">
     <div
       #editor
       class="editor"
       contenteditable="true"
-      [(ngModel)]="content"
+      role="textbox"
+      aria-label="Document content"
+      aria-multiline="true"
+      spellcheck="true"
+      (input)="content = editor.innerHTML"
     ></div>
-  </mat-form-field>
-</div>
+  </section>
+</section>

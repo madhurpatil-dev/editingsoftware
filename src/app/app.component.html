@@ -1,37 +1,26 @@
-<div class="wrapper">
-  <nav class="navbar navbar-expand-lg nv">
-    <a class="navbar-brand" href="/">Text Editor</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <button
-            mat-button
-            title="Toggle Dark Mode"
-            (click)="toggleDarkMode()"
-            class="dark-mode-toggle"
-          >
-            <mat-icon>{{ isDarkMode ? "light_mode" : "dark_mode" }}</mat-icon>
-            <span class="toggle-text">{{
-              isDarkMode ? "Light Mode" : "Dark Mode"
-            }}</span>
-          </button>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <div class="content">
+<div class="app-shell">
+  <header class="app-header">
+    <nav class="header-inner" aria-label="Main navigation">
+      <a class="brand" href="/" aria-label="Text Editor home">
+        <span class="brand-mark" aria-hidden="true">
+          <mat-icon>edit_note</mat-icon>
+        </span>
+        <span>Text Editor</span>
+      </a>
+      <button
+        mat-button
+        type="button"
+        title="Toggle dark mode"
+        (click)="toggleDarkMode()"
+        class="dark-mode-toggle"
+      >
+        <mat-icon aria-hidden="true">{{ isDarkMode ? "light_mode" : "dark_mode" }}</mat-icon>
+        <span>{{ isDarkMode ? "Light mode" : "Dark mode" }}</span>
+      </button>
+    </nav>
+  </header>
+  <main class="content">
     <app-text-editor></app-text-editor>
-  </div>
+  </main>
   <app-footer></app-footer>
 </div>
