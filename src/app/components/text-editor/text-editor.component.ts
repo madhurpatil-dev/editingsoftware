@@ -27,6 +27,7 @@ declare var webkitSpeechRecognition: any;
 
 @Component({
   selector: 'app-text-editor',
+  standalone: false,
   templateUrl: './text-editor.component.html',
   styleUrls: ['./text-editor.component.css'],
 })
