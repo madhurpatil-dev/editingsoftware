@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 import { TextEditorComponent } from './text-editor.component';
 
 describe('TextEditorComponent', () => {
@@ -8,7 +10,9 @@ describe('TextEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TextEditorComponent]
+      declarations: [TextEditorComponent],
+      imports: [CommonModule, MatIconModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
     
