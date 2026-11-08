@@ -100,21 +100,24 @@
           aria-label="Insert emoji"
           (mousedown)="$event.preventDefault()"
           (click)="toggleEmojiPicker()"
-        >
+          >
           <span aria-hidden="true">😊</span>
         </button>
-        <div *ngIf="showEmojiPicker" class="emoji-picker" role="group" aria-label="Choose an emoji">
-          <button
-            type="button"
-            class="emoji-option"
-            *ngFor="let emoji of emojis"
-            [attr.aria-label]="'Insert ' + emoji"
-            (mousedown)="$event.preventDefault()"
-            (click)="insertEmoji(emoji)"
-          >
-            {{ emoji }}
-          </button>
-        </div>
+        @if (showEmojiPicker) {
+          <div class="emoji-picker" role="group" aria-label="Choose an emoji">
+            @for (emoji of emojis; track emoji) {
+              <button
+                type="button"
+                class="emoji-option"
+                [attr.aria-label]="'Insert ' + emoji"
+                (mousedown)="$event.preventDefault()"
+                (click)="insertEmoji(emoji)"
+                >
+                {{ emoji }}
+              </button>
+            }
+          </div>
+        }
       </div>
 
       <button type="button" mat-icon-button title="Insert line break" aria-label="Insert line break" (click)="insertLineBreak()">
@@ -125,13 +128,15 @@
         (mouseenter)="showHighlightOptions = true"
         (mouseleave)="showHighlightOptions = false"
         (focusin)="showHighlightOptions = true"
-      >
+        >
         <button type="button" mat-icon-button title="Highlight" aria-label="Highlight text">
           <mat-icon aria-hidden="true">highlight</mat-icon>
         </button>
-        <div class="dropdown-content" *ngIf="showHighlightOptions">
-          <color-sketch (onChangeComplete)="handleColorChange($event)"></color-sketch>
-        </div>
+        @if (showHighlightOptions) {
+          <div class="dropdown-content">
+            <color-sketch (onChangeComplete)="handleColorChange($event)"></color-sketch>
+          </div>
+        }
       </div>
 
       <button type="button" mat-icon-button title="Toggle read-only" aria-label="Toggle read-only" (click)="toggleReadOnly()">
@@ -161,7 +166,7 @@
         [title]="isVoiceTyping ? 'Stop voice typing' : 'Start voice typing'"
         [attr.aria-label]="isVoiceTyping ? 'Stop voice typing' : 'Start voice typing'"
         (click)="startVoiceTyping()"
-      >
+        >
         <mat-icon aria-hidden="true">{{ isVoiceTyping ? "mic_off" : "mic" }}</mat-icon>
       </button>
     </div>
@@ -183,7 +188,7 @@
           class="btn-read"
           [attr.aria-label]="isReading ? 'Stop reading' : 'Start reading'"
           (click)="isReading ? stopReading() : startReading()"
-        >
+          >
           <svg class="btn-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
             <path fill="currentColor" [attr.d]="isReading ? 'M6 6h12v12H6z' : 'M8 5v14l11-7z'"/>
           </svg>

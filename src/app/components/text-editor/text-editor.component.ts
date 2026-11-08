@@ -9,6 +9,7 @@ import {
   OnDestroy,
   Renderer2,
   ChangeDetectorRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -29,6 +30,7 @@ declare var webkitSpeechRecognition: any;
   selector: 'app-text-editor',
   standalone: false,
   templateUrl: './text-editor.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./text-editor.component.css'],
 })
 export class TextEditorComponent implements OnInit {
