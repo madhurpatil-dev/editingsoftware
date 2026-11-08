@@ -1,6 +1,21 @@
 # Editingsoftware
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+This project uses [Angular CLI](https://github.com/angular/angular-cli) 22.2.
+
+## Requirements
+
+- Node.js 26.13.0 LTS (see `.nvmrc`)
+- npm 12 or later
+
+With NVM for Windows, install and activate the project version using `nvm install 26.13.0` and `nvm use 26.13.0`.
+
+## Editor features
+
+- Rich-text formatting, emoji, tables, read-only mode, and read-aloud tools.
+- Automatic local saving as you type; documents stay in this browser.
+- Rename documents, view live word/character counts and reading time, and export to text, HTML, or PDF.
+- Use **Ctrl+S** (Windows/Linux) or **⌘+S** (macOS) to save immediately.
+- Dark mode preference is remembered on this device.
 
 ## Development server
 

@@ -11,6 +11,7 @@
         mat-button
         type="button"
         title="Toggle dark mode"
+        [attr.aria-pressed]="isDarkMode"
         (click)="toggleDarkMode()"
         class="dark-mode-toggle"
       >

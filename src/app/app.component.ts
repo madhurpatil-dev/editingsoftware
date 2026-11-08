@@ -8,28 +8,26 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  darkMode: boolean = false;
-
   isDarkMode: boolean = false;
 
   ngOnInit(): void {
-    this.isDarkMode = localStorage.getItem('darkMode') === 'true';
+    try {
+      this.isDarkMode = localStorage.getItem('darkMode') === 'true';
+    } catch (error) {
+      console.error('Unable to read the saved theme preference.', error);
+    }
     this.applyDarkMode();
   }
 
-// layout.component.ts
-toggleDarkMode(): void {
-  this.isDarkMode = !this.isDarkMode;
-  const body = document.body;
-  if (this.isDarkMode) {
-    body.classList.add('dark-mode');
-    body.classList.remove('light-mode');
-  } else {
-    body.classList.remove('dark-mode');
-    body.classList.add('light-mode');
+  toggleDarkMode(): void {
+    this.isDarkMode = !this.isDarkMode;
+    this.applyDarkMode();
+    try {
+      localStorage.setItem('darkMode', String(this.isDarkMode));
+    } catch (error) {
+      console.error('Unable to save the theme preference.', error);
+    }
   }
-}
-
 
   applyDarkMode(): void {
     if (this.isDarkMode) {

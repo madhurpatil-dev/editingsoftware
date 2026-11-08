@@ -1,18 +1,19 @@
 <section class="editor-page" aria-labelledby="page-title">
   <header class="page-intro">
     <div>
-      <p class="eyebrow">WORKSPACE</p>
-      <h1 id="page-title">A clear space for your ideas</h1>
-      <p class="page-description">Write, format, and save your text in one place.</p>
+      <p class="eyebrow">YOUR WRITING SPACE</p>
+      <h1 id="page-title">Make room for good ideas.</h1>
+      <p class="page-description">A calm, capable workspace for everything you want to write.</p>
     </div>
   </header>
 
   <section class="editor-card" aria-label="Text editor">
     <div class="toolbar-heading">
       <h2>Formatting tools</h2>
-      <span class="toolbar-hint">Choose a tool to format your text</span>
+      <span class="toolbar-hint">Tip: press Ctrl/⌘ + S to save</span>
     </div>
     <div class="toolbar" role="group" aria-label="Text formatting tools">
+      <div class="toolbar-group" role="group" aria-label="Text and paragraph formatting">
       <button type="button" mat-icon-button title="Bold" aria-label="Bold" (click)="format('bold')">
         <mat-icon aria-hidden="true">format_bold</mat-icon>
       </button>
@@ -79,6 +80,8 @@
       <button type="button" mat-icon-button title="Toggle blockquote" aria-label="Toggle blockquote" (click)="toggleBlockquote()">
         <mat-icon aria-hidden="true">format_quote</mat-icon>
       </button>
+      </div>
+      <div class="toolbar-group" role="group" aria-label="Insert and highlight">
       <button type="button" mat-icon-button title="Insert date" aria-label="Insert date" (click)="insertDate()">
         <mat-icon aria-hidden="true">date_range</mat-icon>
       </button>
@@ -92,7 +95,7 @@
         <mat-icon aria-hidden="true">copyright</mat-icon>
       </button>
 
-      <div class="emoji-container" (mouseenter)="openEmojiPicker()" (mouseleave)="closeEmojiPicker()">
+      <div class="emoji-container">
         <button
           type="button"
           mat-icon-button
@@ -123,13 +126,8 @@
       <button type="button" mat-icon-button title="Insert line break" aria-label="Insert line break" (click)="insertLineBreak()">
         <mat-icon aria-hidden="true">wrap_text</mat-icon>
       </button>
-      <div
-        class="highlight-dropdown"
-        (mouseenter)="showHighlightOptions = true"
-        (mouseleave)="showHighlightOptions = false"
-        (focusin)="showHighlightOptions = true"
-        >
-        <button type="button" mat-icon-button title="Highlight" aria-label="Highlight text">
+      <div class="highlight-dropdown">
+        <button type="button" mat-icon-button title="Highlight" aria-label="Highlight text" (click)="toggleHighlight()" [attr.aria-expanded]="showHighlightOptions">
           <mat-icon aria-hidden="true">highlight</mat-icon>
         </button>
         @if (showHighlightOptions) {
@@ -139,8 +137,10 @@
         }
       </div>
 
-      <button type="button" mat-icon-button title="Toggle read-only" aria-label="Toggle read-only" (click)="toggleReadOnly()">
-        <mat-icon aria-hidden="true">lock</mat-icon>
+      </div>
+      <div class="toolbar-group" role="group" aria-label="Document tools">
+      <button type="button" mat-icon-button [title]="isReadOnly ? 'Enable editing' : 'Read-only mode'" [attr.aria-label]="isReadOnly ? 'Enable editing' : 'Read-only mode'" [attr.aria-pressed]="isReadOnly" (click)="toggleReadOnly()">
+        <mat-icon aria-hidden="true">{{ isReadOnly ? "lock" : "lock_open" }}</mat-icon>
       </button>
       <button type="button" mat-icon-button title="Fullscreen" aria-label="Toggle fullscreen" (click)="toggleFullscreen()">
         <mat-icon aria-hidden="true">fullscreen</mat-icon>
@@ -150,6 +150,9 @@
       </button>
       <button type="button" mat-icon-button title="Download as HTML" aria-label="Download as HTML" (click)="downloadAsHTML()">
         <mat-icon aria-hidden="true">code</mat-icon>
+      </button>
+      <button type="button" mat-icon-button title="Download as PDF" aria-label="Download as PDF" (click)="downloadAsPDF()">
+        <mat-icon aria-hidden="true">picture_as_pdf</mat-icon>
       </button>
       <button type="button" mat-icon-button title="Insert table caption" aria-label="Insert table caption" (click)="insertTableCaption('Table Caption')">
         <mat-icon aria-hidden="true">notes</mat-icon>
@@ -169,19 +172,48 @@
         >
         <mat-icon aria-hidden="true">{{ isVoiceTyping ? "mic_off" : "mic" }}</mat-icon>
       </button>
+      </div>
     </div>
 
     <div class="editor-actions">
       <div class="editor-label">
-        <h2>Your document</h2>
-        <span>Changes are ready to save when you are</span>
+        <label for="document-title">Document title</label>
+        <input
+          id="document-title"
+          class="document-title"
+          type="text"
+          maxlength="80"
+          [value]="documentTitle"
+          (input)="updateDocumentTitle($event)"
+          aria-label="Document title"
+        />
+        <span
+          class="save-status"
+          [class.save-error]="saveStatus === 'Unable to save' || saveStatus === 'Storage unavailable'"
+          [class.save-pending]="saveStatus === 'Saving…' || saveStatus === 'Unsaved changes'"
+          aria-live="polite"
+        >
+          <span class="status-dot" aria-hidden="true"></span>
+          {{ saveStatus }}
+          @if (lastSavedAt) {
+            <span class="saved-time">· {{ lastSavedAt | date:'shortTime' }}</span>
+          }
+        </span>
       </div>
       <div class="button-group">
         <button type="button" class="btn-save" (click)="saveContent()">
           <svg class="btn-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24">
             <path fill="currentColor" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
           </svg>
-          <span>Save content</span>
+          <span>Save now</span>
+        </button>
+        <button type="button" class="btn-read" (click)="copyAsText()" [disabled]="!hasContent">
+          <mat-icon class="btn-icon" aria-hidden="true">content_copy</mat-icon>
+          <span>Copy text</span>
+        </button>
+        <button type="button" class="btn-read" (click)="clearDocument()" [disabled]="!hasContent">
+          <mat-icon class="btn-icon" aria-hidden="true">delete_outline</mat-icon>
+          <span>Clear</span>
         </button>
         <button
           type="button"
@@ -200,12 +232,23 @@
     <div
       #editor
       class="editor"
-      contenteditable="true"
+      [class.is-read-only]="isReadOnly"
+      [attr.contenteditable]="isReadOnly ? 'false' : 'true'"
       role="textbox"
       aria-label="Document content"
       aria-multiline="true"
       spellcheck="true"
-      (input)="content = editor.innerHTML"
+      (input)="onEditorInput()"
+      (mouseup)="rememberSelection()"
+      (keyup)="rememberSelection()"
     ></div>
+    <footer class="document-stats" aria-label="Document statistics">
+      <span>{{ getWordCount() }} {{ getWordCount() === 1 ? 'word' : 'words' }}</span>
+      <span class="stats-divider" aria-hidden="true"></span>
+      <span>{{ getCharacterCount() }} {{ getCharacterCount() === 1 ? 'character' : 'characters' }}</span>
+      <span class="stats-divider" aria-hidden="true"></span>
+      <span>{{ getReadingTime() }} min read</span>
+      <span class="stats-note">Saved on this device</span>
+    </footer>
   </section>
 </section>
